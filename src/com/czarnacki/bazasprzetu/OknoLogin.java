@@ -33,10 +33,10 @@ public class OknoLogin extends JFrame implements ActionListener, KeyListener, Fo
 
 
 	/**
-	 * Create the frame.
+	 * Create the frame. z polskimi znaczkami
 	 */
 	public OknoLogin() {
-		setTitle("BazaSprz\u0119tu - Logowanie");
+		setTitle("BazaSprzętu - Logowanie");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 257, 208);
 		setLocation((Toolkit.getDefaultToolkit().getScreenSize().width  - getSize().width) / 2, 
@@ -57,7 +57,7 @@ public class OknoLogin extends JFrame implements ActionListener, KeyListener, Fo
 		contentPane.add(inputLogin);
 		
 		
-		textHaslo = new JLabel("Has\u0142o", SwingConstants.RIGHT);
+		textHaslo = new JLabel("Hasło", SwingConstants.RIGHT);
 		textHaslo.setVerticalAlignment(SwingConstants.TOP);
 		contentPane.add(textHaslo);
 		
