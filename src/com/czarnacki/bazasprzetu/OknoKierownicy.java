@@ -299,7 +299,7 @@ public class OknoKierownicy extends JFrame implements ActionListener, KeyListene
 	      }
 
 	      int result = JOptionPane.showConfirmDialog(null, myPanel, 
-	               "Podaj dane kierownika", JOptionPane.OK_CANCEL_OPTION);
+	               "Dane kierownika", JOptionPane.OK_CANCEL_OPTION);
 	      if (result == JOptionPane.OK_OPTION) {
 	         System.out.println("nazwisko: " + nazwisko.getText());
 	         System.out.println("imie: " + imie.getText());
