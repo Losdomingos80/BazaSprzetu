@@ -55,7 +55,7 @@ public class OknoKierownicy extends JFrame implements ActionListener, KeyListene
 	 */
 	public OknoKierownicy(MySql serwer) {
 		baza = serwer;
-		setTitle("Kierownicy");
+		setTitle("Słownik - Kierownicy");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
