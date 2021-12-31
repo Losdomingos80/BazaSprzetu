@@ -4,6 +4,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -12,7 +14,10 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.awt.Color;
+//import java.awt.EventQueue;
 
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
@@ -29,13 +34,63 @@ public class OknoLogin extends JFrame implements ActionListener, KeyListener, Fo
 	private JPasswordField inputHaslo;
 	private JSeparator separator;
 	private JButton buttonLogowanie;
+	static MySql baza;
 
 
+	@SuppressWarnings("deprecation")
+	private void zapytaj() {
+		baza.ConnectToMySQL();
+		try {
+			 
+			ResultSet resultSet = null;
+			String login;
+			String haslo;
+			login = inputLogin.getText();
+			haslo = inputHaslo.getText();
+			resultSet = baza.Select("SELECT * FROM users WHERE login = '" + login + "'");
+			if(resultSet != null) {
+				String[][] wynik = baza.Logowanie(resultSet);
+				
+				if(wynik.length != 0) {
+					if(login.equals(wynik[0][0]) && haslo.equals(wynik[0][1])) {
+						System.out.println("zalogowano");
+						inputLogin.setText("");
+						inputHaslo.setText("");
+						
+								new OknoGlowne(baza, login);
+								dispose();
+
+					}
+					else {
+						System.out.println("nie zalogowano");
+						JOptionPane.showMessageDialog(null,  "Błędny login lub hasło", "Błąd", JOptionPane.ERROR_MESSAGE);
+					}
+				}
+				else {
+					System.out.println("nie zalogowano");
+					JOptionPane.showMessageDialog(null,  "Błędny login lub hasło", "Błąd", JOptionPane.ERROR_MESSAGE);
+				}
+				
+			}
+			
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("nie zalogowano");
+			JOptionPane.showMessageDialog(null,  "Błędny login lub hasło", "Błąd", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+			
+		}
+		
+	}
 
 	/**
 	 * Create the frame. z polskimi znaczkami
 	 */
-	public OknoLogin() {
+	public OknoLogin(MySql serwer) {
+		
+		baza = serwer;
 		setTitle("BazaSprzętu - Logowanie");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 257, 208);
@@ -96,6 +151,7 @@ public class OknoLogin extends JFrame implements ActionListener, KeyListener, Fo
 			if(source == buttonLogowanie) {
 				try {
 					System.out.println("logowanie");
+					zapytaj();
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -130,6 +186,7 @@ public class OknoLogin extends JFrame implements ActionListener, KeyListener, Fo
  		if(source == buttonLogowanie) {}
  			try {
  				System.out.println("logowanie");
+ 				zapytaj();
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
