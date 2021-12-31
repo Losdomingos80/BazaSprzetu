@@ -92,16 +92,25 @@ public class OknoKierownicy extends JFrame implements ActionListener, KeyListene
 			      int rendererWidth = component.getPreferredSize().width;
 			      TableColumn tableColumn = getColumnModel().getColumn(column);
 			      tableColumn.setPreferredWidth(Math.max(rendererWidth + getIntercellSpacing().width, tableColumn.getPreferredWidth()));
+			      Component returnComp = super.prepareRenderer(renderer, row, column);
+			      Color alternateColor = new Color(252,242,206);
+			      Color whiteColor = Color.WHITE;
+			      if (!returnComp.getBackground().equals(getSelectionBackground())){
+			        Color bg = (row % 2 == 0 ? alternateColor : whiteColor);
+			        returnComp .setBackground(bg);
+			        bg = null;
+			      }
 			      return component;
 			    }
 			  	public boolean editCellAt(int row, int column, java.util.EventObject e) {
 			  		return false;
 			  	}
 			  };
+		table.addKeyListener(this);
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		table.setEnabled(true);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		table.setFocusable(false);
+		table.setFocusable(true);
 		
 		table.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent me) {
@@ -176,6 +185,25 @@ public class OknoKierownicy extends JFrame implements ActionListener, KeyListene
 				try {
 					System.out.println("szukanie");
 					wyszukaj();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+			
+			
+        }
+		if (e.getKeyCode()==KeyEvent.VK_ENTER){
+			if(source == table) {
+				try {
+					 JTable target = (JTable)e.getSource();
+	                  int row = target.getSelectedRow(); 
+	              
+	                  int id = Integer.valueOf(table.getModel().getValueAt(row, 0).toString());
+	                  String n = (String) table.getModel().getValueAt(row, 1);
+	                  String i = (String) table.getModel().getValueAt(row, 2);
+	                  int s = Integer.valueOf(table.getModel().getValueAt(row, 3).toString());
+	                  dialog(2, id, n, i, s);
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
