@@ -55,7 +55,7 @@ public class OknoKierownicy extends JFrame implements ActionListener, KeyListene
 	 */
 	public OknoKierownicy(MySql serwer) {
 		baza = serwer;
-		setTitle("Kierownicy");
+		setTitle("Słownik - Kierownicy");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -258,6 +258,7 @@ public class OknoKierownicy extends JFrame implements ActionListener, KeyListene
 			resultSet = baza.Select("SELECT * FROM kierownicy");
 			String[][] wiersz = baza.zapytanieKierownicy(resultSet);
 			((DefaultTableModel) table.getModel()).setDataVector(wiersz, naglowek);
+			table.setAutoCreateRowSorter(true); 
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -299,7 +300,7 @@ public class OknoKierownicy extends JFrame implements ActionListener, KeyListene
 	      }
 
 	      int result = JOptionPane.showConfirmDialog(null, myPanel, 
-	               "Podaj dane nowego kierownika", JOptionPane.OK_CANCEL_OPTION);
+	               "Dane kierownika", JOptionPane.OK_CANCEL_OPTION);
 	      if (result == JOptionPane.OK_OPTION) {
 	         System.out.println("nazwisko: " + nazwisko.getText());
 	         System.out.println("imie: " + imie.getText());
