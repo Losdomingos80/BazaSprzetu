@@ -258,6 +258,7 @@ public class OknoKierownicy extends JFrame implements ActionListener, KeyListene
 			resultSet = baza.Select("SELECT * FROM kierownicy");
 			String[][] wiersz = baza.zapytanieKierownicy(resultSet);
 			((DefaultTableModel) table.getModel()).setDataVector(wiersz, naglowek);
+			table.setAutoCreateRowSorter(true); 
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

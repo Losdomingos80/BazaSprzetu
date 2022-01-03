@@ -4,6 +4,8 @@ package com.czarnacki.bazasprzetu;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.KeyStroke;
+
 import java.awt.BorderLayout;
 //import java.awt.Color;
 import java.awt.Dimension;
@@ -72,9 +74,11 @@ public class OknoGlowne extends JFrame implements ActionListener, KeyListener, F
 		
 		
 		JMenuBar menuBar = new JMenuBar();
+	
 		frmBazaSprztu.setJMenuBar(menuBar);
 		
 		JMenu mnNewMenu = new JMenu("Plik");
+		
 		menuBar.add(mnNewMenu);
 		
 		mntmNewMenuItem = new JMenuItem("Logowanie");
