@@ -37,6 +37,7 @@ import java.awt.Font;
 @SuppressWarnings("serial")
 public class OknoKierownicy extends JFrame implements ActionListener, KeyListener, FocusListener{
 
+	public static JFrame oknKier;
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTable table;
@@ -55,13 +56,14 @@ public class OknoKierownicy extends JFrame implements ActionListener, KeyListene
 	 */
 	public OknoKierownicy(MySql serwer) {
 		baza = serwer;
-		setTitle("Słownik - Kierownicy");
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		oknKier = new JFrame();
+		oknKier.setTitle("Słownik - Kierownicy");
+		oknKier.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		oknKier.setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
-		setContentPane(contentPane);
+		oknKier.setContentPane(contentPane);
 		
 		JToolBar toolBar = new JToolBar();
 		contentPane.add(toolBar, BorderLayout.NORTH);
@@ -129,7 +131,7 @@ public class OknoKierownicy extends JFrame implements ActionListener, KeyListene
          });
 
 
-		getContentPane().add(new JScrollPane(table));
+		oknKier.getContentPane().add( new JScrollPane(table));
 
 		try {
 			odczytaj();
@@ -141,9 +143,9 @@ public class OknoKierownicy extends JFrame implements ActionListener, KeyListene
 		
 		
 		
-		setPreferredSize(new Dimension(600, 800));
-		pack();
-		setVisible(true);
+		oknKier.setPreferredSize(new Dimension(600, 800));
+		oknKier.pack();
+		oknKier.setVisible(true);
 	}
 
 

@@ -36,13 +36,16 @@ public class OknoGlowne extends JFrame implements ActionListener, KeyListener, F
 	static MySql baza;
 	static String user;
 	private JFrame frmBazaSprztu;
+
 	private JPanel statusBar;
 	private JLabel status;
 	private final JPanel panel = new JPanel();
 	private JMenuItem mntmNewMenuItem;
 	private JMenuItem mntmNewMenuItem_1;
 	private JMenuItem mntmNewMenuItem_2;
-
+	private JMenuItem mntmNewMenuItem_3;
+	private JMenuItem mntmNewMenuItem_4;
+	private JMenuItem mntmNewMenuItem_5;
 	
 	/**
 	 * Create the application.
@@ -90,19 +93,23 @@ public class OknoGlowne extends JFrame implements ActionListener, KeyListener, F
 		
 		mntmNewMenuItem_1 = new JMenuItem("Działy");
 		mnNewMenu_1.add(mntmNewMenuItem_1);
+		mntmNewMenuItem_1.addActionListener(this);
 		
 		mntmNewMenuItem_2 = new JMenuItem("Kierownicy");
 		mnNewMenu_1.add(mntmNewMenuItem_2);
 		mntmNewMenuItem_2.addActionListener(this);
 		
-		JMenuItem mntmNewMenuItem_3 = new JMenuItem("Zestawy");
+		mntmNewMenuItem_3 = new JMenuItem("Zestawy");
 		mnNewMenu_1.add(mntmNewMenuItem_3);
+		mntmNewMenuItem_3.addActionListener(this);
 		
-		JMenuItem mntmNewMenuItem_4 = new JMenuItem("Sprzęt");
+		mntmNewMenuItem_4 = new JMenuItem("Sprzęt");
 		mnNewMenu_1.add(mntmNewMenuItem_4);
+		mntmNewMenuItem_4.addActionListener(this);
 		
-		JMenuItem mntmNewMenuItem_5 = new JMenuItem("Grupy");
+		mntmNewMenuItem_5 = new JMenuItem("Grupy");
 		mnNewMenu_1.add(mntmNewMenuItem_5);
+		mntmNewMenuItem_5.addActionListener(this);
 		
 		frmBazaSprztu.getContentPane().add(panel, BorderLayout.NORTH);
 		frmBazaSprztu.getContentPane().add(statusBar, BorderLayout.SOUTH);
@@ -117,10 +124,70 @@ public class OknoGlowne extends JFrame implements ActionListener, KeyListener, F
 	public void logowanieMenu() {
 		new OknoLogin(baza);
 		frmBazaSprztu.dispose();
+		OknoKierownicy.oknKier.dispose();
+		OknoZestaw.oknZest.dispose();
+		
+		
 	}
 	
 	public void kierownicyMenu() {
-		new OknoKierownicy(baza);
+		try {
+			OknoKierownicy.oknKier.dispose();
+			new OknoKierownicy(baza);
+			
+		} catch (Exception e) {
+			new OknoKierownicy(baza);
+		}
+		
+		
+	}
+	
+	public void dzialyMenu() {
+		try {
+			OknoDzialy.oknDzia.dispose();
+			new OknoDzialy(baza);
+			
+		} catch (Exception e) {
+			new OknoDzialy(baza);
+		}
+		
+		
+	}
+	
+	public void sprzetMenu() {
+		try {
+			OknoSprzet.oknSprz.dispose();
+			new OknoSprzet(baza);
+			
+		} catch (Exception e) {
+			new OknoSprzet(baza);
+		}
+		
+		
+	}
+	
+	public void zestawMenu() {
+		System.out.println("uruchamiam okno zestaw");
+		try {
+			OknoZestaw.oknZest.dispose();
+			new OknoZestaw();
+		} catch (Exception e) {
+			new OknoZestaw();
+		}
+		
+		
+	}
+	
+	public void grupyMenu() {
+		System.out.println("uruchamiam okno grupy");
+		try {
+			OknoGrupy.oknGrup.dispose();
+			new OknoGrupy(baza);
+		} catch (Exception e) {
+			new OknoGrupy(baza);
+		}
+		
+		
 	}
 	
 	public void actionPerformed(ActionEvent e) {
@@ -130,6 +197,15 @@ public class OknoGlowne extends JFrame implements ActionListener, KeyListener, F
  		if(source == mntmNewMenuItem) {
  			try {
  				logowanieMenu();
+ 				
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+ 		}
+ 		if(source == mntmNewMenuItem_1) {
+ 			try {
+ 				dzialyMenu();
  				
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
@@ -147,7 +223,33 @@ public class OknoGlowne extends JFrame implements ActionListener, KeyListener, F
 				e1.printStackTrace();
 			}
  		}
- 			
+ 		if(source == mntmNewMenuItem_3) {
+ 			try {
+ 				zestawMenu();
+ 				
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+ 		}
+ 		if(source == mntmNewMenuItem_4) {
+ 			try {
+ 				sprzetMenu();
+ 				
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+ 		}
+ 		if(source == mntmNewMenuItem_5) {
+ 			try {
+ 				grupyMenu();
+ 				
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+ 		}
 		
 	}
 
