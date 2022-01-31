@@ -93,7 +93,7 @@ public class OknoKierownicy extends JFrame implements ActionListener, KeyListene
 			      Component component = super.prepareRenderer(renderer, row, column);
 			      int rendererWidth = component.getPreferredSize().width;
 			      TableColumn tableColumn = getColumnModel().getColumn(column);
-			      tableColumn.setPreferredWidth(Math.max(rendererWidth + getIntercellSpacing().width, tableColumn.getPreferredWidth()));
+			      tableColumn.setPreferredWidth(Math.max(rendererWidth + getIntercellSpacing().width + 10, tableColumn.getPreferredWidth()));
 			      Component returnComp = super.prepareRenderer(renderer, row, column);
 			      Color alternateColor = new Color(252,242,206);
 			      Color whiteColor = Color.WHITE;

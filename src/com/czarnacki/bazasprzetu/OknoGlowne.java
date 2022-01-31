@@ -51,6 +51,10 @@ public class OknoGlowne extends JFrame implements ActionListener, KeyListener, F
 	 * Create the application.
 	 */
 	public OknoGlowne(MySql serwer, String login) {
+		
+		//System.setProperty("dominik", "alamakota");
+		
+		
 		baza = serwer;
 		user = login;
 		System.out.println("uruchomiono okno glowne");
